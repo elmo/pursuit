@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Public Personnel</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <%= render partial: "layouts/flash" -%>
+    <%= render partial: "layouts/header" -%>
+    <div class="row">
+      <div class="col s10 offset-s1">
+       <%= yield %>
+     </div>
+   </div>
+  <%= render partial: "layouts/footer"-%>
+  </body>
+</html>
