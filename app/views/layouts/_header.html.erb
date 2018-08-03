@@ -1,7 +1,9 @@
 <nav class="nav-extended">
   <div class="nav-wrapper">
    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    <%= link_to "Falcon", root_path,  class: "brand-logo" -%>
+
+    <%= link_to image_tag('logo.png', :size => '215x28'), root_path %>
+
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <% if !user_signed_in?%>
         <li><%= link_to 'Login', new_user_session_path -%></li>

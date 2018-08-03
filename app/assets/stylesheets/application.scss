@@ -2,3 +2,17 @@
 $primary-color: color("grey", "darken-2") !default;
 $secondary-color: color("teal", "darken-1") !default;
 @import "materialize";
+
+
+body nav{ 
+	box-shadow: none;
+	background-color: transparent
+}
+
+.page-footer{
+	background-color: transparent
+}
+
+.sidenav-trigger{
+	color: gray
+}
