@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180726015157) do
+ActiveRecord::Schema.define(version: 20180808193854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ces", force: :cascade do |t|
+    t.datetime "grouping_date"
+    t.integer "lead_request_users"
+    t.integer "lead_users"
+    t.integer "leads"
+    t.float "leads_by_lead_users"
+    t.float "unreconciled_publisher_lead_revenue"
+    t.integer "clickout_impressions"
+    t.integer "clickouts"
+    t.float "clickthrough_rate"
+    t.float "unreconciled_publisher_clickout_revenue"
+    t.float "unreconciled_publisher_total_revenue"
+    t.string "source_code"
+    t.string "tracking_code"
+    t.integer "adult_lead_request_users"
+    t.integer "adult_lead_users"
+    t.integer "adult_leads"
+    t.integer "adult_leads_by_lead_users"
+    t.float "adult_unreconciled_publisher_lead_revenue"
+    t.integer "adult_clickouts"
+    t.integer "adult_clickout_revenue"
+    t.integer "hs_lead_request_users"
+    t.integer "hs_lead_users"
+    t.integer "hs_leads"
+    t.integer "hs_leads_by_lead_users"
+    t.float "hs_unreconciled_published_clickout_revenue"
+    t.integer "hs_clickouts"
+    t.float "hs_clickout_revenue"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

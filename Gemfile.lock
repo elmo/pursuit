@@ -59,6 +59,7 @@ GEM
       xpath (>= 2.0, < 4.0)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
+    chronic (0.10.2)
     city-state (0.0.13)
       rubyzip (~> 1.1)
     coffee-rails (4.2.2)
@@ -224,6 +225,7 @@ DEPENDENCIES
   best_in_place
   byebug
   capybara (~> 2.13)
+  chronic
   city-state
   coffee-rails (~> 4.2)
   devise
