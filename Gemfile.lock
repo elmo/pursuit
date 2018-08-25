@@ -123,6 +123,9 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (5.0.2)
     nio4r (2.3.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
@@ -236,6 +239,7 @@ DEPENDENCIES
   material_icons
   materialize-form
   materialize-sass (~> 1.0.0.rc1)
+  net-sftp
   pg
   puma (~> 3.7)
   rails (~> 5.1.6)
