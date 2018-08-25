@@ -36,5 +36,19 @@ class DataImporter
        end
     end
   end
-end
 
+  def self.import_pusuit
+    file_names = ['pursuit_metrics.csv' ]
+    file_names.each do |file_name|
+      CSV.foreach("db/files/#{file_name}", headers: true ).each do |row|
+         pm = PursuitMetric.new
+         pm.date = Chronic.parse(row[0])
+         pm.account_id = row[1]
+         pm.custom = row[2]
+         pm.earnings = row[3].to_f
+         pm.save
+       end
+    end
+  end
+
+end

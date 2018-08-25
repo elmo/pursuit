@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @pursuit_metric.date %>
+</p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @pursuit_metric.account_id %>
+</p>
+
+<p>
+  <strong>Custom:</strong>
+  <%= @pursuit_metric.custom %>
+</p>
+
+<p>
+  <strong>Earnings:</strong>
+  <%= @pursuit_metric.earnings %>
+</p>
+
+<%= link_to 'Edit', edit_pursuit_metric_path(@pursuit_metric) %> |
+<%= link_to 'Back', pursuit_metrics_path %>

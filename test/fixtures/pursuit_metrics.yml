@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2018-08-25 08:52:51
+  account_id: 1
+  custom: MyString
+  earnings: 1.5
+
+two:
+  date: 2018-08-25 08:52:51
+  account_id: 1
+  custom: MyString
+  earnings: 1.5

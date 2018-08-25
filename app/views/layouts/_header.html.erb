@@ -6,7 +6,8 @@
       <% if !user_signed_in?%>
         <li><%= link_to 'Login', new_user_session_path -%></li>
       <% else %>
-        <li><%= current_user.first_name -%> <%= current_user.last_name -%> </li>
+        <li><%= link_to 'Campus Explorer Raw', ces_path -%></li>
+        <li><%= link_to 'Pursuit Raw', pursuit_metrics_path -%></li>
         <li><%= link_to 'Log out', destroy_user_session_path, method: :delete, id: "sign-out-link"  -%></li>
       <% end %>
     </ul>
@@ -15,7 +16,6 @@
   <% if user_signed_in? %>
     <div class="nav-content">
       <ul class="tabs tabs-transparent">
-          <li class="tab"><%= link_to 'Agencies', '#'-%></li>
       </ul>
     </div>
   <% end %>
@@ -23,7 +23,6 @@
 
 <ul id="slide-out" class="sidenav">
  <% if user_signed_in? %>
-   <li><%= link_to 'Agencies', '#'-%></li>
    <li><%= link_to 'Log out', destroy_user_session_path, method: :delete, id: "sign-out-link"  -%> </li>
  <% else %>
    <li><%= link_to 'Login', new_user_session_path -%></li>
