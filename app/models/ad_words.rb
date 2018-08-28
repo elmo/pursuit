@@ -15,13 +15,12 @@ class AdWords
  end
 
  def campaigns
-    service = api.service(:CampaignService, get_api_version())
     selector = {
       :fields => ['Id', 'Name', 'Status'],
       :ordering => [{:field => 'Id', :sort_order => 'ASCENDING'}],
       :paging => {:start_index => 0, :number_results => 50 }
     }
-    service.get(selector)
+    campaign_service.get(selector)
  end
 
 end

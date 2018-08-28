@@ -29,11 +29,12 @@
   #:oauth2_key: INSERT_OAUTH2_KEY_HERE
   #:oauth2_issuer: INSERT_OAUTH2_ISSUER_HERE
   # To impersonate a user set prn to an email address.
-  #:oauth2_prn: INSERT_OAUTH2_PRN_HERE
+  #:oauth2_prn: 'pmgdatabase2@pursuit-media-group.iam.gserviceaccount.com' 
+  #:oauth2_prn: 'james@pursuitmediagroup.com'
 
   # Other parameters.
   :developer_token: 'ePLafod1j5naoIH12Iz0sw'
-  :client_customer_id: '106202514230513166782'
+  :client_customer_id: '109007632304567710939'
   :user_agent: 'Falcon' 
 :connection:
   # Enable to request all responses to be compressed.
@@ -43,7 +44,7 @@
   # :proxy: INSERT_PROXY_HERE
 :library:
   # Optional: set the log level.
-  :log_level: INFO
+  :log_level: DEBUG 
   # Optional: uncomment to skip header / summary rows in reporting.
   #:skip_report_header: true
   #:skip_report_summary: true
