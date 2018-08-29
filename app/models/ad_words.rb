@@ -1,26 +1,19 @@
-require 'adwords_api'
+require 'google/ads/googleads'
 class AdWords
-   attr_accessor :api
+   attr_accessor :client
+   PAGE_SIZE = 10
+   CUSTOMER_ID = '975-045-2965'
 
   def initialize
-     @api = api
+   @client = Google::Ads::Googleads::GoogleadsClient.new('config/googleads_config.rb')
   end
 
-  def api
-    AdwordsApi::Api.new('config/ad_manager_api.yml')
+  def get_campaigns
+    ga_service = client.service(:GoogleAds)
+    response = ga_service.search('975-045-2965', 'SELECT campaign.id, campaign.name FROM campaign ORDER BY campaign.id', page_size: 1000)
+    response.each do |row|
+      puts sprintf("Campaign with ID %d and name '%s' was found.",
+        row.campaign.id, row.campaign.name)
+    end
   end
-
-  def campaign_service
-    api.service(:CampaignService, :v201802)
- end
-
- def campaigns
-    selector = {
-      :fields => ['Id', 'Name', 'Status'],
-      :ordering => [{:field => 'Id', :sort_order => 'ASCENDING'}],
-      :paging => {:start_index => 0, :number_results => 50 }
-    }
-    campaign_service.get(selector)
- end
-
 end
