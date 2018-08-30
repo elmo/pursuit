@@ -1,17 +1,16 @@
-require 'googleauth'
 require 'optparse'
+require 'googleauth'
 
 def authenticate_in_standalone_application(client_id, client_secret)
   client_id = Google::Auth::ClientId.new(client_id, client_secret)
-  user_authorizer = Google::Auth::UserAuthorizer.new( client_id, SCOPE, nil, CALLBACK_URI)
+  user_authorizer = Google::Auth::UserAuthorizer.new(client_id, SCOPE, nil, CALLBACK_URI)
   authorization_url = user_authorizer.get_authorization_url()
   printf("Paste this url in your browser:\n%s\n", authorization_url)
   printf("Type the code you received here: ")
   authorization_code = gets.chomp
   user_credentials = user_authorizer.get_credentials_from_code(code: authorization_code)
   printf("Your refresh token is: %s\n", user_credentials.refresh_token)
-  printf("Copy your refresh token above into your googleads_config.rb in your "\
-      "home directory or use it when instantiating the library.\n")
+  printf("Copy your refresh token above into your googleads_config.rb in your home directory or use it when instantiating the library.\n")
 end
 
 if __FILE__ == $PROGRAM_NAME
@@ -19,7 +18,7 @@ if __FILE__ == $PROGRAM_NAME
   SCOPE = 'https://www.googleapis.com/auth/adwords'
   options = {}
   options[:client_id] = '1024167817881-3pre5mglugkirshqdqqc53bie7jhjuif.apps.googleusercontent.com'
-  options[:client_secret] = 'XIHIWsv4X1rEMCCxGuOq-Feh'
+  options[:client_secret] = 'ITB4BdpMJt7KNcFqQzzck3j5'
   OptionParser.new do |opts|
     opts.banner = sprintf('Usage: %s [options]', File.basename(__FILE__))
     opts.separator ''

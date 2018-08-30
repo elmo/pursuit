@@ -1,0 +1,18 @@
+---
+:authentication:
+  :method: OAuth2
+  :oauth2_client_id: 1024167817881-3pre5mglugkirshqdqqc53bie7jhjuif.apps.googleusercontent.com 
+  :oauth2_client_secret: ITB4BdpMJt7KNcFqQzzck3j5 
+  :developer_token: ePLafod1j5naoIH12Iz0sw
+  :client_customer_id: 9750452965
+  :user_agent: Ruby Falcon
+  :oauth2_token:
+    :access_token: ya29.GlsJBrDy85QEekUsTslpih4eeehPkkggQjb6uyMejz8gnDWa_lGrWlpwyZzIYAADuMV37xS731Wjc45q9zOG0VbvMlw6fAkzzDinynLRPmUs5Ibc4WRvEqNewHDG
+    :refresh_token: 1/I4aA7LgfZDghvWWXcgSaFf3oIXYvpVEAeMbPkDXbwy4
+    :issued_at: 2018-08-30 09:23:21.573193000 -07:00
+    :expires_in: 11216
+    :id_token: 
+:connection:
+  :enable_gzip: false
+:library:
+  :log_level: INFO
