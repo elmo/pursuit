@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Client customer:</strong>
+  <%= @campaign.client_customer_id %>
+</p>
+
+<p>
+  <strong>Campaign:</strong>
+  <%= @campaign.campaign_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @campaign.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @campaign.status %>
+</p>
+
+<p>
+  <strong>Budget:</strong>
+  <%= @campaign.budget %>
+</p>
+
+<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
+<%= link_to 'Back', campaigns_path %>

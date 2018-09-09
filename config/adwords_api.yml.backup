@@ -1,0 +1,18 @@
+---
+:authentication:
+  :method: OAuth2
+  :oauth2_client_id: 178517224030-mqs6ap9d5aup4uanh07boli2aes1nfmk.apps.googleusercontent.com 
+  :oauth2_client_secret: HUkGO79L64ZrDNMJ4F-OnPtB 
+  :developer_token: ePLafod1j5naoIH12Iz0sw
+  :client_customer_id: 9750452965
+  :user_agent: Ruby Falcon
+  :oauth2_token:
+    :access_token: 
+    :refresh_token: 
+    :issued_at: 
+    :expires_in: 
+    :id_token: 
+:connection:
+  :enable_gzip: false
+:library:
+  :log_level: INFO

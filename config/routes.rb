@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :campaigns
   resources :pursuit_metrics
   resources :ces
   devise_for :users
