@@ -1,3 +1,6 @@
+require 'csv'
+require 'tempfile'
+
 class Ce < ApplicationRecord
  SFTP_HOST = 'campusexplorer.brickftp.com'
  SFTP_USERNAME = 'criminaljusticepursuit'
@@ -39,6 +42,26 @@ class Ce < ApplicationRecord
     ce.save
   end
 
+  def self.save_csv_to_google_drive
+    to_csv
+    google_drive = GoogleDrive.new
+    google_drive.save_file_to_drive(file_name, file_name)
+  end
+
+  def self.file_name
+    "campus-explorer-#{Date.today.strftime("%Y-%m-%d")}.csv"
+  end
+
+  def self.to_csv
+    CSV.open(file_name, 'wb') do |csv|
+      Ce.all.each do |ce|
+        row = []
+        Ce.cols.each { |col| row << ce.send(col) }
+        csv << row
+      end
+    end
+  end
+
   def self.read_last_entry_data
     lines = []
     last_entry_data.split(/\n/).each_with_index do |line,i|
@@ -46,6 +69,14 @@ class Ce < ApplicationRecord
        lines << line
     end
     lines
+  end
+
+  def self.save_last_entry_to_google_drive
+    file = File.open(file_name, 'w')
+    file.write last_entry_data
+    file.close
+    google_drive = GoogleDrive.new
+    google_drive.save_file_to_drive(file_name, file_name)
   end
 
   def self.last_entry_data

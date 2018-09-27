@@ -74,6 +74,8 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    declarative (0.0.10)
+    declarative-option (0.1.0)
     devise (4.4.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -105,6 +107,14 @@ GEM
     google-adwords-api (1.3.0)
       google-ads-common (~> 1.0.0)
       nori (~> 2.6)
+    google-api-client (0.23.9)
+      addressable (~> 2.5, >= 2.5.1)
+      googleauth (>= 0.5, < 0.7.0)
+      httpclient (>= 2.8.1, < 3.0)
+      mime-types (~> 3.0)
+      representable (~> 3.0)
+      retriable (>= 2.0, < 4.0)
+      signet (~> 0.9)
     google-dfp-api (1.4.0)
       google-ads-common (~> 1.0.0)
       tzinfo (~> 1.0)
@@ -159,6 +169,8 @@ GEM
       activerecord
       kaminari-core (= 1.1.1)
     kaminari-core (1.1.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -176,6 +188,9 @@ GEM
       sass (>= 3.5.2)
     memoist (0.16.0)
     method_source (0.9.0)
+    mime-types (3.2.2)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2018.0812)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
@@ -223,9 +238,14 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    representable (3.0.4)
+      declarative (< 0.1.0)
+      declarative-option (< 0.2.0)
+      uber (< 0.2.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    retriable (3.1.2)
     rly (0.2.3)
     rolify (5.2.0)
     ruby_dep (1.5.0)
@@ -273,6 +293,7 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    uber (0.1.0)
     uglifier (4.1.16)
       execjs (>= 0.3.0, < 3)
     warden (1.2.7)
@@ -304,10 +325,13 @@ DEPENDENCIES
   devise
   google-ads-googleads
   google-adwords-api
+  google-api-client (~> 0.11)
   google-dfp-api
+  googleauth
   jbuilder (~> 2.5)
   jquery-rails
   kaminari
+  launchy
   listen (>= 3.0.5, < 3.2)
   material_icons
   materialize-form
