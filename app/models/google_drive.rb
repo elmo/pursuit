@@ -4,11 +4,11 @@ require 'googleauth/stores/file_token_store'
 require 'fileutils'
 
 class GoogleDrive
-  CONF = '/app/config/'
+  CONF = ENV['CONF']
   OOB_URI = 'urn:ietf:wg:oauth:2.0:oob'.freeze
   APPLICATION_NAME = 'Ruby Falcon'.freeze
   CREDENTIALS_PATH = CONF + 'google_drive_client_secret.json'.freeze
-  TOKEN_PATH =  CONF + 'token.yaml'.freeze
+  TOKEN_PATH = CONF + 'token.yaml'.freeze
   SCOPE = "https://www.googleapis.com/auth/drive"
   Drive = Google::Apis::DriveV2
 
