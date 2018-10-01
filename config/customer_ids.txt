@@ -1,0 +1,11 @@
+[:links,
+:manager_customer_id=>9750452965, :client_customer_id=>8173901894, :is_hidden=>false
+:manager_customer_id=>9750452965, :client_customer_id=>1013522257, :is_hidden=>false
+:manager_customer_id=>9750452965, :client_customer_id=>3937774822, :is_hidden=>false
+
+:manager_customer_id=>9750452965, :client_customer_id=>6565039802, :is_hidden=>true
+:manager_customer_id=>9750452965, :client_customer_id=>8648043019, :is_hidden=>true
+:manager_customer_id=>9750452965, :client_customer_id=>4908157862, :is_hidden=>true
+:manager_customer_id=>9750452965, :client_customer_id=>2171584532, :is_hidden=>true
+:manager_customer_id=>9750452965, :client_customer_id=>3912999113, :is_hidden=>true
+:manager_customer_id=>9750452965, :client_customer_id=>5185056133, :is_hidden=>true

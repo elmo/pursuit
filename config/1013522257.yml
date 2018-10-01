@@ -4,13 +4,13 @@
   :oauth2_client_id: 178517224030-mqs6ap9d5aup4uanh07boli2aes1nfmk.apps.googleusercontent.com
   :oauth2_client_secret: HUkGO79L64ZrDNMJ4F-OnPtB
   :developer_token: ePLafod1j5naoIH12Iz0sw
-  :client_customer_id: 3937774822
+  :client_customer_id: 1013522257 
   :user_agent: Ruby Falcon
   :oauth2_token:
-    :access_token: ya29.GlsmBk38DEcr4-De7dPHqMiAxEj1VxBlqhxa5TUpoxdkXC_n_ELKWRGBf-Jxd6BlKR5sZhd-gQgQyqruySCWa-7g6GXZw48fPhMSAKNH6N3s0jZsElETRRFcLLmf
-    :refresh_token: 1/hbgBvuHUVOOjw6gR5Ij7Fjx8ZPivdNfLE7Y9KBLjflQ
-    :issued_at: 2018-09-27 21:36:50.761220000 -07:00
-    :expires_in: 1052088
+    :access_token: 
+    :refresh_token: 
+    :issued_at: 
+    :expires_in: 
     :id_token: 
 :connection:
   :enable_gzip: false

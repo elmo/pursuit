@@ -71,3 +71,4 @@ gem 'googleauth'
 gem 'google-api-client', '~> 0.11'
 gem 'launchy'
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'redis'

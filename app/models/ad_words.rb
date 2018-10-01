@@ -1,6 +1,7 @@
 require 'adwords_api'
 class AdWords
    attr_accessor :client
+   attr_accessor :client_customer_id
    attr_accessor :customers
    attr_accessor :campaigns
    attr_accessor :child_accounts
@@ -10,15 +11,38 @@ class AdWords
    attr_accessor :unique_client_customer_ids
    attr_accessor :account_map
    attr_accessor :account_hidden_map
-
+   attr_accessor :redis
    PAGE_SIZE = 50
+   CLIENT_IDS = [8173901894, 1013522257, 3937774822]
 
-  def initialize
-   @client ||= AdwordsApi::Api.new('config/adwords_api.yml')
+  def initialize(id)
+   @client_customer_id = id
+   @client ||= init_from_config
+   authorize!
   end
 
-  def customer_service
-    client.service(:CustomerService)
+  def authorize!
+   @redis = Redis.new
+   token = get_stored_auth_token
+   refreshed_token = client.authorize({:oauth2_token => token})
+   redis.set(client_customer_id, refreshed_token.to_json)
+  end
+
+
+  def init_from_config
+    AdwordsApi::Api.new("config/#{client_customer_id}.yml")
+  end
+
+  def get_stored_auth_token
+   token = JSON.parse(redis.get(client_customer_id) )
+  end
+
+  def active_client_customer_ids
+    [8173901894, 1013522257, 3937774822]
+  end
+
+  def self.refresh_tokens!
+    CLIENT_IDS.each { |id| aw = AdWords.new(id) }
   end
 
   def update_campaigns
@@ -26,7 +50,7 @@ class AdWords
      @campaigns.each do |campaign|
        c = Campaign.find_by(campaign_id: campaign[:id].to_s)
        if c.present?
-         c.update_attributes(name: campaign[:name], status: campaign[:status], budget: campaign[:budget] , status: campaign[:status] )
+         c.update_attributes(name: campaign[:name], status: campaign[:status], budget: campaign[:budget] )
        else
          Campaign.create!(client_customer_id: '3937774822' , campaign_id: campaign[:id].to_s, name: campaign[:name], status: campaign[:status], budget: campaign[:budget] )
        end

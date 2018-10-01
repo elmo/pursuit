@@ -242,6 +242,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
+    redis (3.3.5)
     representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
@@ -345,6 +346,7 @@ DEPENDENCIES
   pg
   puma (~> 3.7)
   rails (~> 5.1.6)
+  redis
   rolify
   sass-rails (~> 5.0)
   selenium-webdriver
