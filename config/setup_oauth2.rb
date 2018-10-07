@@ -11,21 +11,12 @@ def setup_oauth2(client_customer_id)
     verification_code = gets.chomp
     verification_code
   end
-
   if token
-    print "\nWould you like to update your adwords_api.yml to save " + "OAuth2 credentials? (y/N): "
-    response = gets.chomp
-    if ('y'.casecmp(response) == 0) or ('yes'.casecmp(response) == 0)
-      adwords.save_oauth2_token(token)
-      puts 'OAuth2 token is now saved to ~/adwords_api.yml and will be automatically used by the library.'
-      #p token
-    else
-       p "saving token to redis"
-       redis = Redis.new
-       redis.set(client_customer_id, token.to_json)
-    end
+    p "Saving token to redis"
+    redis = Redis.new
+    redis.set(client_customer_id, token.to_json)
   end
-
+  #adwords.update!( :additional_parameters => {"include_granted_scopes" => "true"})
   # token = adwords.authorize({:oauth2_verification_code => verification_code})
   # Note, 'token' is a Hash. Its value is not used in this example. If you need
   # to be able to access the API in offline mode, with no user present, you

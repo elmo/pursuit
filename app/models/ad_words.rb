@@ -1,4 +1,5 @@
 require 'adwords_api'
+require 'Chronic'
 class AdWords
    attr_accessor :client
    attr_accessor :client_customer_id
@@ -12,12 +13,16 @@ class AdWords
    attr_accessor :account_map
    attr_accessor :account_hidden_map
    attr_accessor :redis
+   attr_accessor :token
+   attr_accessor :configs
+
    PAGE_SIZE = 50
    CLIENT_IDS = [8173901894, 1013522257, 3937774822]
 
   def initialize(id)
    @client_customer_id = id
-   @client ||= init_from_config
+   #@client ||= init_from_config
+   @client ||= init_from_hash
    authorize!
   end
 
@@ -28,21 +33,96 @@ class AdWords
    redis.set(client_customer_id, refreshed_token.to_json)
   end
 
-
   def init_from_config
     AdwordsApi::Api.new("config/#{client_customer_id}.yml")
   end
 
+  def init_from_hash
+    AdwordsApi::Api.new(config_hash)
+  end
+
   def get_stored_auth_token
-   token = JSON.parse(redis.get(client_customer_id) )
+   @token = JSON.parse(redis.get(client_customer_id) )
+  end
+
+  def refresh_token
+    (token.present?) ? token['refresh_token']  : ''
+  end
+
+  def issued_at
+    (token.present?) ? token['issued_at']  : ''
+  end
+
+  def expires_in
+    (token.present?) ? token['expires_in']  : ''
+  end
+
+  def id_token
+    (token.present?) ? token['id_token']  : ''
+  end
+
+  def config_hash
+    {
+      :authentication => {
+        :method => 'OAuth2',
+        :oauth2_client_id => '178517224030-mqs6ap9d5aup4uanh07boli2aes1nfmk.apps.googleusercontent.com',
+        :oauth2_client_secret => 'HUkGO79L64ZrDNMJ4F-OnPtB',
+        :developer_token => 'ePLafod1j5naoIH12Iz0sw',
+        :client_customer_id => client_customer_id,
+        :user_agent => user_agent,
+        :oauth2_token => { :refresh_token => refresh_token },
+        :additional_parameters => {"access_type" => "offline"}
+      },
+      :service => { :environment => 'PRODUCTION' }
+    }
+  end
+
+  def user_agent
+    'Ruby Falcon'
   end
 
   def active_client_customer_ids
-    [8173901894, 1013522257, 3937774822]
+    #[8173901894, 1013522257, 3937774822]
+    [3937774822]
   end
 
   def self.refresh_tokens!
-    CLIENT_IDS.each { |id| aw = AdWords.new(id) }
+    @configs = []
+    CLIENT_IDS.each { |id| @configs << AdWords.new(id) }
+  end
+
+  def self.test_loop
+    loop do
+       p "time is: " + Time.zone.now.to_s
+       c = AdWords.new(3937774822)
+       p c.authorize!
+       sleep(60)
+    end
+  end
+
+  def self.test_config!(config)
+    p "testing config #{config.client_customer_id}"
+    begin
+      config.get_campaigns
+      p "valid"
+      p "token expires in: " + config.expires_in.to_s
+      expiry =  Chronic.parse(config.issued_at.to_s) + config.expires_in.seconds
+      p "issued at: " + Chronic.parse(config.issued_at.to_s).strftime("%B %d, %Y %H:%M:%S %P")
+      p "expires: " + expiry.strftime("%B %d, %Y %H:%M:%S %P ")
+      p config.token
+    rescue AdwordsApi::V201806::CampaignService::ApiException
+      p "token expires in: " + config.expires_in.to_s
+      expiry =  Chronic.parse(config.issued_at.to_s) + config.expires_in.seconds
+      p "issued at: " + Chronic.parse(config.issued_at.to_s).strftime("%B %d, %Y %H:%M:%S %P")
+      p "expires: " + expiry.strftime("%B %d, %Y %H:%M:%S %P ")
+      p "token invalid"
+    end
+  end
+
+  def self.test_configs!
+    refresh_tokens!
+    @configs.each  { |conf| test_config!(conf)  }
+    nil
   end
 
   def update_campaigns
