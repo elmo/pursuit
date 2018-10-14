@@ -13,7 +13,7 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
-*.csv
+/*.csv
 
 # Ignore all logfiles and tempfiles.
 /log/*
