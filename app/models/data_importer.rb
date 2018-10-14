@@ -1,4 +1,5 @@
 require 'csv'
+require 'chronic'
 class DataImporter
   def self.import_ce_data
     file_names = ['ce_data_2017.csv' ,'ce_data_2018.csv' ]
