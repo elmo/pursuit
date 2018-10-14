@@ -2,17 +2,36 @@ require 'csv'
 class Pum < ApplicationRecord
 
 
+  def self.send_report_to_google_drive(pums)
+     timestamp = Time.zone.now.strftime("%Y-%m-%d-%H-%M")
+     file_name = "#{timestamp}-export.csv"
+     CSV.open(file_name, "wb") do |csv|
+       csv << atts
+       pums.each do |pum|
+         csv << atts.map{ |attr| pum.send(attr) }
+       end
+     end
+    google_drive = GoogleDrive.new
+    google_drive.save_file_to_drive(file_name, file_name)
+    File.unlink(file_name)
+  end
+
+  def self.atts
+    [
+    "date", "label", "account_id", "campaign_id", "ad_group_id",
+     "keyword_id", "publisher", "account_name", "campaign_name",
+     "ad_group_name", "keyword", "focus_word", "industry", "device_type",
+     "impressions", "cost_per_click", "cost", "click_count",
+     "total_unreconciled_revenue", "total_clickout_revenue", "leads",
+     "clickouts", "lead_users", "lead_request_users"
+     ]
+  end
+
   def self.to_csv
-    attributes = ["date", "label", "account_id", "campaign_id", "ad_group_id",
-                  "keyword_id", "publisher", "account_name", "campaign_name",
-                  "ad_group_name", "keyword", "focus_word", "industry", "device_type",
-                  "impressions", "cost_per_click", "cost", "click_count",
-                  "total_unreconciled_revenue", "total_clickout_revenue", "leads",
-                  "clickouts", "lead_users", "lead_request_users"]
     CSV.generate(headers: true) do |csv|
-      csv << attributes
+      csv << atts
         all.each do |pum|
-        csv << attributes.map{ |attr| pum.send(attr)  }
+        csv << atts.map{ |attr| pum.send(attr)  }
       end
    end
  end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181013165317) do
+ActiveRecord::Schema.define(version: 20181014162528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,19 @@ ActiveRecord::Schema.define(version: 20181013165317) do
     t.integer "lead_request_users"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_pums_on_account_id"
+    t.index ["account_name"], name: "index_pums_on_account_name"
+    t.index ["ad_group_id"], name: "index_pums_on_ad_group_id"
+    t.index ["ad_group_name"], name: "index_pums_on_ad_group_name"
+    t.index ["campaign_id"], name: "index_pums_on_campaign_id"
+    t.index ["campaign_name"], name: "index_pums_on_campaign_name"
+    t.index ["device_type"], name: "index_pums_on_device_type"
+    t.index ["focus_word"], name: "index_pums_on_focus_word"
+    t.index ["industry"], name: "index_pums_on_industry"
+    t.index ["keyword"], name: "index_pums_on_keyword"
+    t.index ["keyword_id"], name: "index_pums_on_keyword_id"
+    t.index ["label"], name: "index_pums_on_label"
+    t.index ["publisher"], name: "index_pums_on_publisher"
   end
 
   create_table "pursuit_metrics", force: :cascade do |t|

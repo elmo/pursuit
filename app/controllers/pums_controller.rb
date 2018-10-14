@@ -30,7 +30,7 @@ class PumsController < ApplicationController
       @pums = scope.page(params[:page]).order( { @sort_property => @sort_order } ).per(20)
     end
     if params[:export].present?
-      #export to google
+      Pum.send_report_to_google_drive(@pums)
     end
     respond_to do |format|
       format.html
