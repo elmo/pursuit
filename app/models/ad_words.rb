@@ -1,5 +1,5 @@
 require 'adwords_api'
-require 'Chronic'
+#require 'chronic'
 class AdWords
    attr_accessor :client
    attr_accessor :client_customer_id
