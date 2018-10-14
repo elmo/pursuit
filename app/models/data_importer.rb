@@ -55,7 +55,7 @@ class DataImporter
   def self.import_pursuit_merged
     file_names = ['pursuit_merged.csv' ]
     file_names.each do |file_name|
-      CSV.foreach("/db/files/#{file_name}", headers: true ).each do |row|
+      CSV.foreach("/app/db/files/#{file_name}", headers: true ).each do |row|
        Pum.import_csv_row(row)
        next
        pum = Pum.new
