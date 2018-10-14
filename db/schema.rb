@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180909232306) do
+ActiveRecord::Schema.define(version: 20181013165317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,35 @@ ActiveRecord::Schema.define(version: 20180909232306) do
     t.float "hs_unreconciled_published_clickout_revenue"
     t.integer "hs_clickouts"
     t.float "hs_clickout_revenue"
+  end
+
+  create_table "pums", force: :cascade do |t|
+    t.datetime "date"
+    t.string "label"
+    t.string "account_id"
+    t.string "campaign_id"
+    t.string "ad_group_id"
+    t.string "keyword_id"
+    t.string "publisher"
+    t.string "account_name"
+    t.string "campaign_name"
+    t.string "ad_group_name"
+    t.string "keyword"
+    t.string "focus_word"
+    t.string "industry"
+    t.string "device_type"
+    t.integer "impressions"
+    t.float "cost_per_click"
+    t.float "cost"
+    t.integer "click_count"
+    t.float "total_unreconciled_revenue"
+    t.float "total_clickout_revenue"
+    t.integer "leads"
+    t.integer "clickouts"
+    t.integer "lead_users"
+    t.integer "lead_request_users"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pursuit_metrics", force: :cascade do |t|

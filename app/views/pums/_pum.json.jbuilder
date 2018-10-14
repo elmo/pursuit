@@ -1,0 +1,2 @@
+json.extract! pum, :id, :date, :label, :account_id, :campaign_id, :ad_group_id, :keyword_id, :publisher, :account_name, :campaign_name, :ad_group_name, :keyword, :focus_word, :industry, :device_type, :impressions, :cost_per_click, :cost, :click_count, :total_unreconciled_revenue, :total_clickout_revenue, :leads, :clickouts, :lead_users, :lead_request_users, :created_at, :updated_at
+json.url pum_url(pum, format: :json)

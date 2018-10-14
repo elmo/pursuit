@@ -1,0 +1,53 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2018-10-13 09:53:17
+  label: MyString
+  account_id: MyString
+  campaign_id: MyString
+  ad_group_id: MyString
+  keyword_id: MyString
+  publisher: MyString
+  account_name: MyString
+  campaign_name: MyString
+  ad_group_name: MyString
+  keyword: MyString
+  focus_word: MyString
+  industry: MyString
+  device_type: MyString
+  impressions: MyString
+  cost_per_click: 1.5
+  cost: 1.5
+  click_count: 1
+  total_unreconciled_revenue: 1.5
+  total_clickout_revenue: 1.5
+  leads: 1
+  clickouts: 1
+  lead_users: 1
+  lead_request_users: 1
+
+two:
+  date: 2018-10-13 09:53:17
+  label: MyString
+  account_id: MyString
+  campaign_id: MyString
+  ad_group_id: MyString
+  keyword_id: MyString
+  publisher: MyString
+  account_name: MyString
+  campaign_name: MyString
+  ad_group_name: MyString
+  keyword: MyString
+  focus_word: MyString
+  industry: MyString
+  device_type: MyString
+  impressions: MyString
+  cost_per_click: 1.5
+  cost: 1.5
+  click_count: 1
+  total_unreconciled_revenue: 1.5
+  total_clickout_revenue: 1.5
+  leads: 1
+  clickouts: 1
+  lead_users: 1
+  lead_request_users: 1

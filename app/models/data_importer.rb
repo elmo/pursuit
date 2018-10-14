@@ -51,4 +51,40 @@ class DataImporter
     end
   end
 
+  def self.import_pursuit_merged
+    file_names = ['pursuit_merged.csv' ]
+    file_names.each do |file_name|
+      CSV.foreach("db/files/#{file_name}", headers: true ).each do |row|
+       Pum.import_csv_row(row)
+       next
+       pum = Pum.new
+       pum.date                       = Chronic.parse(row[0])
+       pum.label                      = row[1]
+       pum.account_id                 = row[2]
+       pum.campaign_id                = row[3]
+       pum.ad_group_id                = row[4]
+       pum.keyword_id                 = row[5]
+       pum.publisher                  = row[6]
+       pum.account_name               = row[7]
+       pum.campaign_name              = row[8]
+       pum.ad_group_name              = row[9]
+       pum.keyword                    = row[10]
+       pum.focus_word                 = row[11]
+       pum.industry                   = row[12]
+       pum.device_type                = row[13]
+       pum.impressions                = row[14].to_i
+       pum.cost_per_click             = row[15].to_f
+       pum.cost                       = row[16].to_f
+       pum.click_count                = row[17].to_i
+       pum.total_unreconciled_revenue = row[18].to_f
+       pum.total_clickout_revenue     = row[19].to_f
+       pum.leads                      = row[20].to_i
+       pum.clickouts                  = row[21].to_i
+       pum.lead_users                 = row[22].to_i
+       pum.lead_request_users         = row[24].to_i
+       pum.save
+     end
+    end
+  end
+
 end

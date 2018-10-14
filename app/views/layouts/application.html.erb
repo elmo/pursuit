@@ -9,14 +9,13 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-   <div class="container">
     <%= render partial: "layouts/flash" -%>
     <%= render partial: "layouts/header" -%>
     <div class="row">
-      <div class="s12">
-       <%= yield %>
-     </div>
-   </div>
+      <div class="col m12">
+      <%= yield %>
+    </div>
+    </div>
    <%= render partial: "layouts/footer"-%>
    </div>
   </body>

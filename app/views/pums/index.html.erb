@@ -1,0 +1,150 @@
+<h4>Pursuit Media Group Merged Data</h4>
+
+<%= form_tag pums_path, role: 'search',  method: :get do |f| %>
+<div class="row">
+
+
+<div class="col m1">
+   <%= text_field_tag :start_date, params[:start_date], class: "datepicker", placeholder: "Start Date" -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :label, params[:label], type: 'search', placeholder: 'Label' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :account_id, params[:account_id], type: 'search', placeholder: 'Account Id' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :campaign_id, params[:campaign_id], type: 'search', placeholder: 'Campaign Id' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :ad_group_id, params[:ad_group_id], type: 'search', placeholder: 'Ad Group Id' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :keyword_id, params[:keyword_id], type: 'search', placeholder: 'Keyword ID' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :publisher, params[:publisher], type: 'search', placeholder: 'Publisher' -%>
+</div>
+</div>
+
+<div class="row">
+
+<div class="col m1">
+   <%= text_field_tag :end_date, params[:end_date], class: "datepicker", placeholder: "End Date" -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :account_name, params[:account_name], type: 'search', placeholder: 'Account Name' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :campaign_name, params[:campaign_name], type: 'search', placeholder: 'Campaign Name' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :ad_group_name, params[:ad_group_name], type: 'search', placeholder: 'Ad Group Name' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :key_word, params[:key_word], type: 'search', placeholder: 'Keyword' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :focus_word, params[:focus_word], type: 'search', placeholder: 'Focus Word' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :industry, params[:industry], type: 'search', placeholder: 'Industry' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :device_type, params[:device_type], type: 'search', placeholder: 'Device Type' -%>
+</div>
+
+<div class="col m2">
+   <%= submit_tag 'Search', class: 'btn margined' %>
+   <%= link_to 'Export to CSV', request.params.merge(format: :csv), class: 'btn margined' -%>
+   <%= link_to 'Save to Google', request.params.merge(export: :google), class: 'btn margined' -%>
+   <%= link_to 'Clear', pums_path, class: 'btn margined' -%>
+</div>
+</div>
+<% end %>
+
+<div class="row">
+<div class="col m12">
+<small>
+<table class="highlight">
+  <thead>
+    <tr>
+      <th><%= link_to 'Date', request.params.merge(sort_property: 'date', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Label', request.params.merge(sort_property: 'label', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Account ID', request.params.merge(sort_property: 'account_id', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Campaign Id', request.params.merge(sort_property: 'campaign_id', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Ad Group Id', request.params.merge(sort_property: 'ad_group_id', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Key Word Id', request.params.merge(sort_property: 'keyword_id', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Publisher', request.params.merge(sort_property: 'publisher', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Account Name', request.params.merge(sort_property: 'account_name', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Campaign Name', request.params.merge(sort_property: 'campaign_name', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Ad Group Name', request.params.merge(sort_property: 'ad_group_name', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Keyword', request.params.merge(sort_property: 'keyword', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Focus Word', request.params.merge(sort_property: 'focus_word', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Industry', request.params.merge(sort_property: 'industry', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Device Type', request.params.merge(sort_property: 'device_type', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Impressions', request.params.merge(sort_property: 'impressions', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'CPC', request.params.merge(sort_property: 'cost_per_click', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Cost', request.params.merge(sort_property: 'cost', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Click Count', request.params.merge(sort_property: 'click_count', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Total Unreconciled Revenue', request.params.merge(sort_property: 'total_unreconciled_revenue', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Total Clickout Revenue', request.params.merge(sort_property: 'total_clickout_revenue', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Leads', request.params.merge(sort_property: 'leads', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Clickouts', request.params.merge(sort_property: 'clickouts', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Lead Users', request.params.merge(sort_property: 'lead_users', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Lead Request Users', request.params.merge(sort_property: 'lead_request_users', sort_order: @next_sort_order)-%> </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pums.each do |pum| %>
+      <tr>
+        <td><%= pum.date.strftime("%b %d, %Y")  %></td>
+        <td><%= pum.label %></td>
+        <td><%= pum.account_id %></td>
+        <td><%= pum.campaign_id %></td>
+        <td><%= pum.ad_group_id %></td>
+        <td><%= pum.keyword_id %></td>
+        <td><%= pum.publisher %></td>
+        <td><%= pum.account_name %></td>
+        <td><%= pum.campaign_name %></td>
+        <td><%= pum.ad_group_name %></td>
+        <td><%= pum.keyword %></td>
+        <td><%= pum.focus_word %></td>
+        <td><%= pum.industry %></td>
+        <td><%= pum.device_type %></td>
+        <td><%= pum.impressions %></td>
+        <td><%= pum.cost_per_click %></td>
+        <td><%= pum.cost %></td>
+        <td><%= pum.click_count %></td>
+        <td><%= pum.total_unreconciled_revenue %></td>
+        <td><%= pum.total_clickout_revenue %></td>
+        <td><%= pum.leads %></td>
+        <td><%= pum.clickouts %></td>
+        <td><%= pum.lead_users %></td>
+        <td><%= pum.lead_request_users %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+</small>
+<%= paginate(@pums)-%>
+
+
+</div>
+</div>
