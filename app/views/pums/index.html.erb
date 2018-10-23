@@ -88,12 +88,14 @@
       <th><%= link_to 'Account ID', request.params.merge(sort_property: 'account_id', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Campaign Id', request.params.merge(sort_property: 'campaign_id', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Ad Group Id', request.params.merge(sort_property: 'ad_group_id', sort_order: @next_sort_order)-%> </th>
-      <th><%= link_to 'Key Word Id', request.params.merge(sort_property: 'keyword_id', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Keyword Id', request.params.merge(sort_property: 'keyword_id', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Match Type ', request.params.merge(sort_property: 'match_type', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Publisher', request.params.merge(sort_property: 'publisher', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Account Name', request.params.merge(sort_property: 'account_name', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Campaign Name', request.params.merge(sort_property: 'campaign_name', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Ad Group Name', request.params.merge(sort_property: 'ad_group_name', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Keyword', request.params.merge(sort_property: 'keyword', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Keyword Status', request.params.merge(sort_property: 'keyword_status', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Focus Word', request.params.merge(sort_property: 'focus_word', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Industry', request.params.merge(sort_property: 'industry', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Device Type', request.params.merge(sort_property: 'device_type', sort_order: @next_sort_order)-%> </th>
@@ -107,7 +109,9 @@
       <th><%= link_to 'Clickouts', request.params.merge(sort_property: 'clickouts', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Lead Users', request.params.merge(sort_property: 'lead_users', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Lead Request Users', request.params.merge(sort_property: 'lead_request_users', sort_order: @next_sort_order)-%> </th>
-      <th><%= link_to 'Conversations', request.params.merge(sort_property: 'conversions', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Conversions', request.params.merge(sort_property: 'conversions', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Final Url', request.params.merge(sort_property: 'final_url', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Final Mobile Url', request.params.merge(sort_property: 'final_mobile_url', sort_order: @next_sort_order)-%> </th>
     </tr>
   </thead>
 
@@ -121,11 +125,13 @@
         <td><%= pum.campaign_id %></td>
         <td><%= pum.ad_group_id %></td>
         <td><%= pum.keyword_id %></td>
+        <td><%= pum.match_type %></td>
         <td><%= pum.publisher %></td>
         <td><%= pum.account_name %></td>
         <td><%= pum.campaign_name %></td>
         <td><%= pum.ad_group_name %></td>
         <td><%= pum.keyword %></td>
+        <td><%= pum.keyword_status %></td>
         <td><%= pum.focus_word %></td>
         <td><%= pum.industry %></td>
         <td><%= pum.device_type %></td>
@@ -140,6 +146,8 @@
         <td><%= pum.lead_users %></td>
         <td><%= pum.lead_request_users %></td>
         <td><%= pum.conversions -%></td>
+        <td><%= pum.final_url -%></td>
+        <td><%= pum.final_mobile_url -%></td>
       </tr>
     <% end %>
   </tbody>

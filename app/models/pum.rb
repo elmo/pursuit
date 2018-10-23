@@ -24,7 +24,7 @@ class Pum < ApplicationRecord
      "ad_group_name", "keyword", "focus_word", "industry", "device_type",
      "impressions", "cost_per_click", "cost", "click_count",
      "total_unreconciled_revenue", "total_clickout_revenue", "leads",
-     "clickouts", "lead_users", "lead_request_users", "conversions"
+     "clickouts", "lead_users", "lead_request_users", "conversions","final_url","final_mobile_url"
      ]
   end
 
