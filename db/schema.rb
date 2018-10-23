@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181014162528) do
+ActiveRecord::Schema.define(version: 20181023144110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,12 +82,19 @@ ActiveRecord::Schema.define(version: 20181014162528) do
     t.integer "lead_request_users"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "computed_id"
+    t.integer "conversions"
+    t.string "match_type"
+    t.string "keyword_status"
+    t.string "final_url"
+    t.string "final_mobile_url"
     t.index ["account_id"], name: "index_pums_on_account_id"
     t.index ["account_name"], name: "index_pums_on_account_name"
     t.index ["ad_group_id"], name: "index_pums_on_ad_group_id"
     t.index ["ad_group_name"], name: "index_pums_on_ad_group_name"
     t.index ["campaign_id"], name: "index_pums_on_campaign_id"
     t.index ["campaign_name"], name: "index_pums_on_campaign_name"
+    t.index ["computed_id"], name: "index_pums_on_computed_id"
     t.index ["device_type"], name: "index_pums_on_device_type"
     t.index ["focus_word"], name: "index_pums_on_focus_word"
     t.index ["industry"], name: "index_pums_on_industry"

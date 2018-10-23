@@ -82,6 +82,7 @@
 <table class="highlight">
   <thead>
     <tr>
+      <th>Computed Id</th>
       <th><%= link_to 'Date', request.params.merge(sort_property: 'date', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Label', request.params.merge(sort_property: 'label', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Account ID', request.params.merge(sort_property: 'account_id', sort_order: @next_sort_order)-%> </th>
@@ -106,12 +107,14 @@
       <th><%= link_to 'Clickouts', request.params.merge(sort_property: 'clickouts', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Lead Users', request.params.merge(sort_property: 'lead_users', sort_order: @next_sort_order)-%> </th>
       <th><%= link_to 'Lead Request Users', request.params.merge(sort_property: 'lead_request_users', sort_order: @next_sort_order)-%> </th>
+      <th><%= link_to 'Conversations', request.params.merge(sort_property: 'conversions', sort_order: @next_sort_order)-%> </th>
     </tr>
   </thead>
 
   <tbody>
     <% @pums.each do |pum| %>
       <tr>
+        <td><%= pum.computed_id -%></td>
         <td><%= pum.date.strftime("%b %d, %Y")  %></td>
         <td><%= pum.label %></td>
         <td><%= pum.account_id %></td>
@@ -136,6 +139,7 @@
         <td><%= pum.clickouts %></td>
         <td><%= pum.lead_users %></td>
         <td><%= pum.lead_request_users %></td>
+        <td><%= pum.conversions -%></td>
       </tr>
     <% end %>
   </tbody>

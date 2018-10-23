@@ -37,5 +37,25 @@ class GoogleDrive
     metadata = drive.insert_file(metadata, upload_source: path, content_type: 'text/csv')
   end
 
+  def list_files
+    drive = Drive::DriveService.new
+    drive.authorization = authorize
+    files = drive.list_files()
+    files.items.each do |file|
+      puts "#{file.id}:  #{file.title}"
+    end
+    nil
+  end
+
+  def download_file
+    drive = Drive::DriveService.new
+    drive.authorization = authorize
+    file_id = '1PSwvFyXFHaar9L6g7E4x0uDHc7YYGtPafar__Q37xvg'
+    file = drive.get_file(file_id)
+    #export_link = file.export_links["text/csv"]
+    content = drive.export_file(file_id, 'text/csv', download_dest: 'sample.txt')
+    byebug
+  end
+
 end
 

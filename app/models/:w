@@ -101,16 +101,9 @@ class DataImporter
        pum.ad_group_name              = row[5]
        pum.ad_group_id                = row[6]
        pum.device_type                = row[7]
-       pum.device_type                = row[7]
-       pum.keyword                    = row[8]
-       pum.keyword_id                 = row[9]
-       pum.match_type                 = row[10]
-       pum.keyword_status             = row[11]
-       pum.final_url                  = row[12]
-       pum.final_mobile_url           = row[13]
-       pum.click_count                = row[14].to_i
-       pum.cost                       = row[15].to_f
-       pum.conversions                = row[16].to_i
+       pum.click_count                = row[8].to_i
+       pum.cost                       = row[9].to_f
+       pum.conversions                = row[10].to_i
        begin
        pum.save!
        rescue
@@ -124,6 +117,8 @@ class DataImporter
     file_names = ['pursuit_google.csv' ]
     file_names.each do |file_name|
       CSV.foreach("db/files/#{file_name}", headers: true ).each do |row|
+       p row
+       next
        pum = Pum.new
        pum.date                       = Chronic.parse(row[0])
        pum.account_name               = row[1]

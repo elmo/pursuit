@@ -10,6 +10,8 @@ task :import_pursuit_merged => :environment do
   DataImporter.import_pursuit_merged
 end
 
-
-
-
+desc "Import Bing Sample"
+task :import_pursuit_bing => :environment do
+  puts "saving local sample file from sample data"
+  DataImporter.import_pursuit_bing
+end

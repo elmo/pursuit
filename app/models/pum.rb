@@ -1,6 +1,7 @@
 require 'csv'
 class Pum < ApplicationRecord
-
+  before_validation :compute_id
+  validates_uniqueness_of :computed_id
 
   def self.send_report_to_google_drive(pums)
      timestamp = Time.zone.now.strftime("%Y-%m-%d-%H-%M")
@@ -23,7 +24,7 @@ class Pum < ApplicationRecord
      "ad_group_name", "keyword", "focus_word", "industry", "device_type",
      "impressions", "cost_per_click", "cost", "click_count",
      "total_unreconciled_revenue", "total_clickout_revenue", "leads",
-     "clickouts", "lead_users", "lead_request_users"
+     "clickouts", "lead_users", "lead_request_users", "conversions"
      ]
   end
 
@@ -64,4 +65,16 @@ class Pum < ApplicationRecord
    pum.lead_request_users = row[24].to_i
    pum.save
   end
+
+  def compound_key
+    keyword_id ||= ''
+    keyword_id + ad_group_id + campaign_id + date.strftime("%Y-%m-%d")
+  end
+
+  def compute_id
+    self.computed_id = Digest::MD5.hexdigest(compound_key)
+  end
+
+  private
+
 end
