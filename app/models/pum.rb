@@ -123,7 +123,6 @@ class Pum < ApplicationRecord
   end
 
   def compound_key
-    keyword_id ||= ''
     keyword_id + ad_group_id + campaign_id + date.strftime("%Y-%m-%d")
   end
 
