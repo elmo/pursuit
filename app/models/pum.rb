@@ -1,7 +1,37 @@
 require 'csv'
 class Pum < ApplicationRecord
   before_validation :compute_id
-  validates_uniqueness_of :computed_id
+  #validates_uniqueness_of :computed_id
+
+
+  def self.process_google_drive
+    download_export_files_from_google_drive
+    save_csv_files_to_database
+  end
+
+  def self.files
+   {
+    '1PSwvFyXFHaar9L6g7E4x0uDHc7YYGtPafar__Q37xvg'  =>  'bing.csv',
+    '1xgshHf7QVqkMb8ko73W5SORaarwTP9kEvYEco7C3j6w'  =>  'google.csv'
+   }
+  end
+
+  def self.download_export_files_from_google_drive
+    google_drive = GoogleDrive.new
+    files.each do |file_id, name|
+      google_drive.download_file(file_id: file_id, name: name)
+    end
+  end
+
+  def self.save_csv_files_to_database
+    files.each do |file_id, name|
+       CSV.foreach("#{name}", headers: true ).each do |row|
+         Pum.save_csv_row(row: row)
+      end
+      File.unlink(name)
+    end
+  end
+
 
   def self.send_report_to_google_drive(pums)
      timestamp = Time.zone.now.strftime("%Y-%m-%d-%H-%M")
@@ -36,6 +66,33 @@ class Pum < ApplicationRecord
       end
    end
  end
+
+   def self.save_csv_row(row:)
+     pum = Pum.new
+     pum.date                       = Chronic.parse(row[0])
+     pum.account_name               = row[1]
+     pum.account_id                 = row[2]
+     pum.campaign_name              = row[3]
+     pum.campaign_id                = row[4]
+     pum.ad_group_name              = row[5]
+     pum.ad_group_id                = row[6]
+     pum.device_type                = row[7]
+     pum.device_type                = row[7]
+     pum.keyword                    = row[8]
+     pum.keyword_id                 = row[9]
+     pum.match_type                 = row[10]
+     pum.keyword_status             = row[11]
+     pum.final_url                  = row[12]
+     pum.final_mobile_url           = row[13]
+     pum.click_count                = row[14].to_i
+     pum.cost                       = row[15].to_f
+     pum.conversions                = row[16].to_i
+     begin
+     pum.save!
+     rescue
+     p "line exists"
+     end
+  end
 
  def self.import_csv_row(row)
    pum = Pum.new

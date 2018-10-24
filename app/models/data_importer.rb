@@ -88,10 +88,12 @@ class DataImporter
     end
   end
 
-  def self.import_pursuit_bing
-    file_names = ['pursuit_bing.csv' ]
+  def self.import_pursuit_files
+    file_names = ['pursuit_bing.csv', 'pursuit_google.csv']
     file_names.each do |file_name|
       CSV.foreach("db/files/#{file_name}", headers: true ).each do |row|
+       Pum.save_csv_row(row: row)
+       next
        pum = Pum.new
        pum.date                       = Chronic.parse(row[0])
        pum.account_name               = row[1]

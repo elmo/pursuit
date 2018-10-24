@@ -47,14 +47,11 @@ class GoogleDrive
     nil
   end
 
-  def download_file
+  def download_file(file_id:, name: )
     drive = Drive::DriveService.new
     drive.authorization = authorize
-    file_id = '1PSwvFyXFHaar9L6g7E4x0uDHc7YYGtPafar__Q37xvg'
     file = drive.get_file(file_id)
-    #export_link = file.export_links["text/csv"]
-    content = drive.export_file(file_id, 'text/csv', download_dest: 'sample.txt')
-    byebug
+    content = drive.export_file(file_id, 'text/csv', download_dest: name)
   end
 
 end
