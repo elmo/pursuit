@@ -3,7 +3,6 @@ class Pum < ApplicationRecord
   before_validation :compute_id
   #validates_uniqueness_of :computed_id
 
-
   def self.process_google_drive
     download_export_files_from_google_drive
     save_csv_files_to_database
