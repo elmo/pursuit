@@ -1,7 +1,7 @@
 require 'csv'
 class Pum < ApplicationRecord
   before_validation :compute_id
-  #validates_uniqueness_of :computed_id
+  validates_uniqueness_of :computed_id
 
   def self.process_google_drive
     download_export_files_from_google_drive
@@ -31,6 +31,39 @@ class Pum < ApplicationRecord
     end
   end
 
+  def self.atts
+    [
+     "date", "account_name", "account_id", "campaign_name", "campaign_id", "ad_group_name", "ad_group_id",
+     "device_type", "keyword", "keyword_id", "match_type", "keyword_status", "final_url", "final_mobile_url",
+     "click_count", "conversions"
+    ]
+  end
+
+ def self.save_csv_row(row:)
+     pum = Pum.new
+     pum.date                       = Chronic.parse(row[0])
+     pum.account_name               = row[1]
+     pum.account_id                 = row[2]
+     pum.campaign_name              = row[3]
+     pum.campaign_id                = row[4]
+     pum.ad_group_name              = row[5]
+     pum.ad_group_id                = row[6]
+     pum.device_type                = row[7]
+     pum.keyword                    = row[8]
+     pum.keyword_id                 = row[9]
+     pum.match_type                 = row[10]
+     pum.keyword_status             = row[11]
+     pum.final_url                  = row[12]
+     pum.final_mobile_url           = row[13]
+     pum.click_count                = row[14].to_i
+     pum.cost                       = row[15].to_f
+     pum.conversions                = row[16].to_i
+     pum.device_type                = "Desktop" if pum.device_type == "Tablets with Full Browsers" or  pum.device_type == "Computers"
+     begin
+       pum.save!
+     rescue
+     end
+  end
 
   def self.send_report_to_google_drive(pums)
      timestamp = Time.zone.now.strftime("%Y-%m-%d-%H-%M")
@@ -46,17 +79,6 @@ class Pum < ApplicationRecord
     File.unlink(file_name)
   end
 
-  def self.atts
-    [
-    "date", "label", "account_id", "campaign_id", "ad_group_id",
-     "keyword_id", "publisher", "account_name", "campaign_name",
-     "ad_group_name", "keyword", "focus_word", "industry", "device_type",
-     "impressions", "cost_per_click", "cost", "click_count",
-     "total_unreconciled_revenue", "total_clickout_revenue", "leads",
-     "clickouts", "lead_users", "lead_request_users", "conversions","final_url","final_mobile_url"
-     ]
-  end
-
   def self.to_csv
     CSV.generate(headers: true) do |csv|
       csv << atts
@@ -66,36 +88,10 @@ class Pum < ApplicationRecord
    end
  end
 
-   def self.save_csv_row(row:)
-     pum = Pum.new
-     pum.date                       = Chronic.parse(row[0])
-     pum.account_name               = row[1]
-     pum.account_id                 = row[2]
-     pum.campaign_name              = row[3]
-     pum.campaign_id                = row[4]
-     pum.ad_group_name              = row[5]
-     pum.ad_group_id                = row[6]
-     pum.device_type                = row[7]
-     pum.device_type                = row[7]
-     pum.keyword                    = row[8]
-     pum.keyword_id                 = row[9]
-     pum.match_type                 = row[10]
-     pum.keyword_status             = row[11]
-     pum.final_url                  = row[12]
-     pum.final_mobile_url           = row[13]
-     pum.click_count                = row[14].to_i
-     pum.cost                       = row[15].to_f
-     pum.conversions                = row[16].to_i
-     begin
-     pum.save!
-     rescue
-     p "line exists"
-     end
-  end
 
  def self.import_csv_row(row)
    pum = Pum.new
-   pum.date= Chronic.parse(row[0])
+   pum.date = Chronic.parse(row[0])
    pum.label = row[1]
    pum.account_id = row[2]
    pum.campaign_id = row[3]
