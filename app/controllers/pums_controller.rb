@@ -1,17 +1,19 @@
 class PumsController < ApplicationController
   before_action :set_pum, only: [:show, :edit, :update, :destroy]
-  before_action :set_date_ranges
+  #before_action :set_date_ranges
 
   def index
     #TODO ad date filters
-    scope = Pum
+    @start_date = (params[:start_date].present?) ? Chronic.parse(params[:start_date]) : Chronic.parse(Date.today - 1.week)
+    @end_date = (params[:end_date].present?) ? Chronic.parse(params[:end_date]) : Chronic.parse(Date.today)
+    @report = params[:report] || 'one'
+    scope = Pum.where(["date >= ? and date <= ?", @start_date, @end_date] )
     scope = scope.where(label: params[:label]              ) if params[:label].present?
     scope = scope.where(account_id: params[:account_id]    ) if params[:account_id].present?
     scope = scope.where(campaign_id: params[:campaign_id]  ) if params[:campaign_id].present?
     scope = scope.where(ad_group_id: params[:ad_group_id]  ) if params[:ad_group_id].present?
     scope = scope.where(keyword_id: params[:keyword_id] ) if params[:keyword_id].present?
     scope = scope.where(publisher:  params[:publisher]  ) if params[:publisher].present?
-
     scope = scope.where(account_name:  params[:account_name]   ) if params[:account_name].present?
     scope = scope.where(campaign_name:  params[:campaign_name] ) if params[:campaign_name].present?
     scope = scope.where(ad_group_name:  params[:ad_group_name] ) if params[:ad_group_name].present?

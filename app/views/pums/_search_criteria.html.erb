@@ -1,0 +1,99 @@
+
+<% if @report == "one" %>
+<h4>Pursuit Media Group Merged Data (1)</h4>
+<% elsif @report == "two" %>
+<h4>Pursuit Media Group Merged Data  (2)</h4>
+<% elsif @report == "three" %>
+<h4>Pursuit Media Group Merged Data (3)</h4>
+<% elsif @report == "four" %>
+<h4>Pursuit Media Group Merged Data (4)</h4>
+<% end %>
+
+<%= form_tag pums_path, role: 'search',  method: :get do |f| %>
+
+<div class="row">
+
+<div class="col m1">
+   <%= text_field_tag :start_date, @start_date.strftime("%m/%d/%Y"), class: "datepicker", placeholder: "Start Date" -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :label, params[:label], type: 'search', placeholder: 'Label' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :account_id, params[:account_id], type: 'search', placeholder: 'Account Id' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :campaign_id, params[:campaign_id], type: 'search', placeholder: 'Campaign Id' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :ad_group_id, params[:ad_group_id], type: 'search', placeholder: 'Ad Group Id' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :keyword_id, params[:keyword_id], type: 'search', placeholder: 'Keyword ID' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :publisher, params[:publisher], type: 'search', placeholder: 'Publisher' -%>
+</div>
+</div>
+
+<div class="row">
+
+<div class="col m1">
+   <%= text_field_tag :end_date, @end_date.strftime("%m/%d/%Y"), class: "datepicker", placeholder: "End Date" -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :account_name, params[:account_name], type: 'search', placeholder: 'Account Name' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :campaign_name, params[:campaign_name], type: 'search', placeholder: 'Campaign Name' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :ad_group_name, params[:ad_group_name], type: 'search', placeholder: 'Ad Group Name' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :key_word, params[:key_word], type: 'search', placeholder: 'Keyword' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :focus_word, params[:focus_word], type: 'search', placeholder: 'Focus Word' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :industry, params[:industry], type: 'search', placeholder: 'Industry' -%>
+</div>
+
+<div class="col m1">
+   <%= text_field_tag :device_type, params[:device_type], type: 'search', placeholder: 'Device Type' -%>
+</div>
+
+</div>
+
+<div class="row">
+  <div class="col m4">
+     <%= link_to "Report One", request.params.merge(report: "one") , class: "btn margined #{@report == 'one' ? 'blue' : '' }" -%>
+     <%= link_to "Report Two", request.params.merge(report: "two") , class: "btn margined #{@report == 'two' ? 'blue' : '' }" -%>
+     <%= link_to "Report Three", request.params.merge(report: "three") , class: "btn margined #{@report == 'three' ? 'blue' : '' }" -%>
+     <%= link_to "Report Four", request.params.merge(report: "four")  , class: "btn margined #{@report == 'four' ? 'blue' : '' }" -%>
+  </div>
+
+
+<div class="col m5">
+   <%= submit_tag 'Search', class: 'btn margined' %>
+   <%= link_to 'Export to CSV', request.params.merge(format: :csv), class: 'btn margined' -%>
+   <%= link_to 'Save to Google', request.params.merge(export: :google), class: 'btn margined' -%>
+   <%= link_to 'Clear', pums_path, class: 'btn margined' -%>
+</div>
+
+</div>
+<% end %>
+

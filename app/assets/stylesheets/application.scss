@@ -20,3 +20,10 @@ body nav{
 .margined {
   margin: .2em;
 }
+
+[type="radio"]:not(:checked), [type="radio"]:checked {
+     position: relative; 
+     opacity: 1; 
+}
+
+
