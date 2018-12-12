@@ -115,6 +115,7 @@ class Ce < ApplicationRecord
 
   def self.cols
    [
+:publisher,
 :grouping_date,
 :campaign_id ,
 :adgroup_id,
