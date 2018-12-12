@@ -4,7 +4,15 @@ class CesController < ApplicationController
   # GET /ces
   # GET /ces.json
   def index
-    @ces = Ce.page(params[:page]).per(10)
+    respond_to  do |format|
+      format.html do
+        @ces = Ce.page(params[:page]).per(10)
+      end
+      format.csv do
+        @ces = Ce.page(params[:page]).per(10)
+        send_data @ces.to_csv, filename: "campus-explorer-#{Date.today.strftime("%m-%d-%Y")}.csv"
+      end
+    end
   end
 
   # GET /ces/1

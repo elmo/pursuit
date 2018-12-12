@@ -6,12 +6,16 @@ class Ce < ApplicationRecord
  SFTP_USERNAME = 'criminaljusticepursuit'
  SFTP_PASSWORD = 'UlRh1Lz&iuq4'
 
+  after_validation :parse_source_code_field
+
   def self.save_last_entry_data
     read_last_entry_data.each {|row| save_row(row)}
   end
 
-  def self.save_row(row)
+  def self.save_row(r)
+    row = r.split(',')
     ce = Ce.new
+    ce.publisher = 'google'
     ce.grouping_date = Chronic.parse(row[0])
     ce.lead_request_users = row[1].to_i
     ce.lead_users = row[2].to_i
@@ -91,8 +95,58 @@ class Ce < ApplicationRecord
     FalconSftp.new(SFTP_HOST,SFTP_USERNAME,SFTP_PASSWORD)
   end
 
+  def parse_source_code_field
+    a = self.source_code.split('_')
+    self.campaign_id = a[2]
+    self.adgroup_id = a[3]
+    self.keyword_id = a[5]
+    self.page_variation_1 = a[6]
+    self.page_variation_2 = a[7]
+  end
+
+  def self.to_csv
+    CSV.generate(headers: true) do |csv|
+      csv << cols
+        all.each do |ce|
+        csv << cols.map{ |attr| ce.send(attr)  }
+      end
+    end
+  end
+
   def self.cols
-   [:grouping_date, :lead_request_users, :lead_users, :leads, :leads_by_lead_users, :unreconciled_publisher_lead_revenue, :clickout_impressions, :clickouts, :clickthrough_rate, :unreconciled_publisher_clickout_revenue, :unreconciled_publisher_total_revenue, :source_code, :tracking_code, :adult_lead_request_users, :adult_lead_users, :adult_leads, :adult_leads_by_lead_users, :adult_unreconciled_publisher_lead_revenue, :adult_clickouts, :adult_clickout_revenue, :hs_lead_request_users, :hs_lead_users, :hs_leads, :hs_leads_by_lead_users, :hs_unreconciled_published_clickout_revenue, :hs_clickouts, :hs_clickout_revenue]
+   [
+:grouping_date,
+:campaign_id ,
+:adgroup_id,
+:keyword_id,
+:page_variation_1,
+:page_variation_2,
+:lead_request_users,
+:lead_users,
+:leads,
+:leads_by_lead_users,
+:unreconciled_publisher_lead_revenue,
+:clickout_impressions,
+:clickouts,
+:clickthrough_rate,
+:unreconciled_publisher_clickout_revenue,
+:unreconciled_publisher_total_revenue,
+:source_code, :tracking_code,
+:adult_lead_request_users,
+:adult_lead_users,
+:adult_leads,
+:adult_leads_by_lead_users,
+:adult_unreconciled_publisher_lead_revenue,
+:adult_clickouts,
+:adult_clickout_revenue,
+:hs_lead_request_users,
+:hs_lead_users,
+:hs_leads,
+:hs_leads_by_lead_users,
+:hs_unreconciled_published_clickout_revenue,
+:hs_clickouts,
+:hs_clickout_revenue
+]
   end
 
 end

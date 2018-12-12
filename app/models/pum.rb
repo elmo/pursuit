@@ -85,9 +85,8 @@ class Pum < ApplicationRecord
         all.each do |pum|
         csv << atts.map{ |attr| pum.send(attr)  }
       end
-   end
- end
-
+    end
+  end
 
  def self.import_csv_row(row)
    pum = Pum.new

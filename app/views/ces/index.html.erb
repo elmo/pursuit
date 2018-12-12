@@ -1,4 +1,8 @@
 <h1>Campus Explorer Data</h1>
+<%= link_to ces_path(format: :csv), class: 'left' do %>
+  Export
+  <i class="material-icons">grid_on</i>
+<% end %>
 <table>
   <thead>
       <% Ce.cols.each do |col| %>

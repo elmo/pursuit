@@ -1,12 +1,22 @@
 
 <% if @report == "one" %>
-<h4>Pursuit Media Group Merged Data (1)</h4>
+<h4>Pursuit Media Group Keyword Merged Data</h4>
+Exported  Weekly
 <% elsif @report == "two" %>
-<h4>Pursuit Media Group Merged Data  (2)</h4>
+<h4>Pursuit Media Group Campaign Merged Data  (2)</h4>
+Notes
+Remove Kewword ID
+Keyword
+Ad Group ID
+Ad Group Name
+Sum Everything under campign id
+Exported Daily
 <% elsif @report == "three" %>
 <h4>Pursuit Media Group Merged Data (3)</h4>
+Exported  Weekly
 <% elsif @report == "four" %>
 <h4>Pursuit Media Group Merged Data (4)</h4>
+ Exported Daily
 <% end %>
 
 <%= form_tag pums_path, role: 'search',  method: :get do |f| %>

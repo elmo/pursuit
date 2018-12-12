@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181023144110) do
+ActiveRecord::Schema.define(version: 20181212020732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,12 @@ ActiveRecord::Schema.define(version: 20181023144110) do
     t.float "hs_unreconciled_published_clickout_revenue"
     t.integer "hs_clickouts"
     t.float "hs_clickout_revenue"
+    t.string "campaign_id"
+    t.string "adgroup_id"
+    t.string "keyword_id"
+    t.string "page_variation_1"
+    t.string "page_variation_2"
+    t.string "publisher"
   end
 
   create_table "pums", force: :cascade do |t|
