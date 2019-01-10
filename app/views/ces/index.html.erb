@@ -3,6 +3,28 @@
   Export
   <i class="material-icons">grid_on</i>
 <% end %>
+
+<%= form_tag ces_path, role: 'search',  method: :get do |f| %>
+  <div class="row">
+    <div class="col m1">
+     <%= text_field_tag :publisher, params[:publisher], type: 'search', placeholder: 'Publisher' -%>
+    </div>
+
+    <div class="col m1">
+     <%= text_field_tag :campaign_id, params[:campaign_id], type: 'search', placeholder: 'Campaign ID' -%>
+    </div>
+
+    <div class="col m2">
+     <%= text_field_tag :adgroup_id, params[:adgroup_id], type: 'search', placeholder: 'Ad Group ID' -%>
+    </div>
+
+    <div class="col m1">
+      <%= submit_tag  "search" %>
+    </div>
+</div>
+
+<% end %>
+
 <table>
   <thead>
       <% Ce.cols.each do |col| %>

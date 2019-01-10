@@ -4,12 +4,16 @@ class CesController < ApplicationController
   # GET /ces
   # GET /ces.json
   def index
+    scope = Ce
+    scope = scope.where(publisher: params[:publisher]) if params[:publisher].present?
+    scope = scope.where(campaign_id: params[:campaign_id]) if params[:campaign_id].present?
+    scope = scope.where(adgroup_id: params[:adgroup_id]) if params[:adgroup_id].present?
     respond_to  do |format|
       format.html do
-        @ces = Ce.page(params[:page]).per(10)
+        @ces = scope.page(params[:page]).per(10)
       end
       format.csv do
-        @ces = Ce.page(params[:page]).per(10)
+        @ces = scope.page(params[:page]).per(10)
         send_data @ces.to_csv, filename: "campus-explorer-#{Date.today.strftime("%m-%d-%Y")}.csv"
       end
     end
