@@ -54,7 +54,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'simple_form'
 gem 'devise'
-gem 'materialize-sass', '~> 1.0.0.rc1'
+gem 'materialize-sass'
 gem 'materialize-form'
 gem 'kaminari'
 gem 'jquery-rails' 

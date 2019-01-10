@@ -15,7 +15,6 @@ class Ce < ApplicationRecord
   def self.save_row(r)
     row = r.split(',')
     ce = Ce.new
-    ce.publisher = 'google'
     ce.grouping_date = Chronic.parse(row[0])
     ce.lead_request_users = row[1].to_i
     ce.lead_users = row[2].to_i
@@ -97,11 +96,13 @@ class Ce < ApplicationRecord
 
   def parse_source_code_field
     a = self.source_code.split('_')
-    self.campaign_id = a[2]
-    self.adgroup_id = a[3]
-    self.keyword_id = a[5]
-    self.page_variation_1 = a[6]
-    self.page_variation_2 = a[7]
+    return if a.size < 3
+    self.campaign_id = a[2].gsub('cp-', '')
+    self.adgroup_id = a[3].gsub('ag-', '')
+    self.keyword_id = a[5].gsub('kw-', '') if a[5].present?
+    self.page_variation_1 = a[6].gsub('p1var-', '') if a[6].present?
+    self.page_variation_2 = a[7].gsub('p2var-', '') if a[7].present?
+    self.publisher = ( a[1] == 'pb-b1') ? 'google' : 'bing'
   end
 
   def self.to_csv

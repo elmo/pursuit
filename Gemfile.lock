@@ -344,7 +344,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   material_icons
   materialize-form
-  materialize-sass (~> 1.0.0.rc1)
+  materialize-sass
   net-sftp
   pg
   puma (~> 3.7)
@@ -363,4 +363,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.0
+   1.17.1
