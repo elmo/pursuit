@@ -1,4 +1,4 @@
-<h1>Campus Explorer Data</h1>
+<h1>Revenue</h1>
 <%= link_to ces_path(format: :csv), class: 'left' do %>
   Export
   <i class="material-icons">grid_on</i>
@@ -36,7 +36,13 @@
     <% @ces.each do |ce| %>
       <tr>
          <% Ce.cols.each do |col| %>
-           <td><%= ce.send(col) -%></td>
+           <td>
+             <% if col == :grouping_date %>
+             <%= ce.send(col).strftime("%m-%d-%Y") -%>
+             <% else %>
+             <%= ce.send(col) -%>
+             <% end %>
+           </td>
          <% end %>
       </tr>
     <% end %>

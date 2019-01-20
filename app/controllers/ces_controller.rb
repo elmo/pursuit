@@ -10,7 +10,7 @@ class CesController < ApplicationController
     scope = scope.where(adgroup_id: params[:adgroup_id]) if params[:adgroup_id].present?
     respond_to  do |format|
       format.html do
-        @ces = scope.page(params[:page]).per(10)
+        @ces = scope.order(computed_id: :asc).page(params[:page]).per(10)
       end
       format.csv do
         @ces = scope.page(params[:page]).per(10)

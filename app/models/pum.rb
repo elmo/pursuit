@@ -48,7 +48,7 @@ class Pum < ApplicationRecord
      pum.campaign_id                = row[4]
      pum.ad_group_name              = row[5]
      pum.ad_group_id                = row[6]
-     pum.device_type                = row[7]
+     pum.device_type = pum.campaign_name.match(/\(.*\)/)[0].gsub(/\W/, '')
      pum.keyword                    = row[8]
      pum.keyword_id                 = row[9]
      pum.match_type                 = row[10]
@@ -58,6 +58,7 @@ class Pum < ApplicationRecord
      pum.click_count                = row[14].to_i
      pum.cost                       = row[15].to_f
      pum.conversions                = row[16].to_i
+
      pum.device_type                = "Desktop" if pum.device_type == "Tablets with Full Browsers" or  pum.device_type == "Computers"
      begin
        pum.save!
@@ -103,7 +104,7 @@ class Pum < ApplicationRecord
    pum.keyword = row[10]
    pum.focus_word = row[11]
    pum.industry = row[12]
-   pum.device_type = row[13]
+   pum.device_type = pum.campaign.match(/\(.*\)/)[0].gsub(/\W/, '')
    pum.impressions = row[14].to_i
    pum.cost_per_click = row[15].to_f
    pum.cost = row[16].to_f

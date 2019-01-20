@@ -7,7 +7,8 @@ class PumsController < ApplicationController
     @start_date = (params[:start_date].present?) ? Chronic.parse(params[:start_date]) : Chronic.parse(Date.today - 1.week)
     @end_date = (params[:end_date].present?) ? Chronic.parse(params[:end_date]) : Chronic.parse(Date.today)
     @report = params[:report] || 'one'
-    scope = Pum.where(["date >= ? and date <= ?", @start_date, @end_date] )
+    #scope = Pum.where(["date >= ? and date <= ?", @start_date, @end_date] )
+    scope = Pum
     scope = scope.where(label: params[:label]              ) if params[:label].present?
     scope = scope.where(account_id: params[:account_id]    ) if params[:account_id].present?
     scope = scope.where(campaign_id: params[:campaign_id]  ) if params[:campaign_id].present?

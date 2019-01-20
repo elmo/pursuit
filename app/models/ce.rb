@@ -7,6 +7,7 @@ class Ce < ApplicationRecord
  SFTP_PASSWORD = 'UlRh1Lz&iuq4'
 
   after_validation :parse_source_code_field
+  after_validation :compute_id
 
   def self.save_last_entry_data
     read_last_entry_data.each {|row| save_row(row)}
@@ -102,7 +103,7 @@ class Ce < ApplicationRecord
     self.keyword_id = a[5].gsub('kw-', '') if a[5].present?
     self.page_variation_1 = a[6].gsub('p1var-', '') if a[6].present?
     self.page_variation_2 = a[7].gsub('p2var-', '') if a[7].present?
-    self.publisher = ( a[1] == 'pb-b1') ? 'google' : 'bing'
+    self.publisher = ( a[1] == 'pb-b1') ? 'bing' : 'google'
   end
 
   def self.to_csv
@@ -115,40 +116,23 @@ class Ce < ApplicationRecord
   end
 
   def self.cols
-   [
-:publisher,
-:grouping_date,
-:campaign_id ,
-:adgroup_id,
-:keyword_id,
-:page_variation_1,
-:page_variation_2,
-:lead_request_users,
-:lead_users,
-:leads,
-:leads_by_lead_users,
-:unreconciled_publisher_lead_revenue,
-:clickout_impressions,
-:clickouts,
-:clickthrough_rate,
-:unreconciled_publisher_clickout_revenue,
-:unreconciled_publisher_total_revenue,
-:source_code, :tracking_code,
-:adult_lead_request_users,
-:adult_lead_users,
-:adult_leads,
-:adult_leads_by_lead_users,
-:adult_unreconciled_publisher_lead_revenue,
-:adult_clickouts,
-:adult_clickout_revenue,
-:hs_lead_request_users,
-:hs_lead_users,
-:hs_leads,
-:hs_leads_by_lead_users,
-:hs_unreconciled_published_clickout_revenue,
-:hs_clickouts,
-:hs_clickout_revenue
-]
+   [:computed_id, :publisher, :grouping_date, :campaign_id , :adgroup_id, :keyword_id, :page_variation_1,
+    :page_variation_2, :lead_request_users, :lead_users, :leads, :leads_by_lead_users,
+    :unreconciled_publisher_lead_revenue, :clickout_impressions, :clickouts, :clickthrough_rate,
+    :unreconciled_publisher_clickout_revenue, :unreconciled_publisher_total_revenue, :source_code, :tracking_code,
+    :adult_lead_request_users, :adult_lead_users, :adult_leads, :adult_leads_by_lead_users,
+    :adult_unreconciled_publisher_lead_revenue, :adult_clickouts, :adult_clickout_revenue, :hs_lead_request_users,
+    :hs_lead_users, :hs_leads, :hs_leads_by_lead_users, :hs_unreconciled_published_clickout_revenue, :hs_clickouts, :hs_clickout_revenue
+   ]
+  end
+
+  def compound_key
+    return '' if keyword_id.blank?
+    keyword_id + adgroup_id + campaign_id + grouping_date.strftime("%Y-%m-%d")
+  end
+
+  def compute_id
+    self.computed_id = Digest::MD5.hexdigest(compound_key)
   end
 
 end
