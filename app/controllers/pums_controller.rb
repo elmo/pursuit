@@ -25,7 +25,7 @@ class PumsController < ApplicationController
 
     @sort_order = params[:sort_order] || 'asc'
     @next_sort_order = (@sort_order == 'desc') ? 'asc' : 'desc'
-    @sort_property =  params[:sort_property] || 'date'
+    @sort_property =  params[:sort_property] || 'computed_id'
 
     if params[:format] == "csv"
       @pums = scope.order( { @sort_property => @sort_order } )
