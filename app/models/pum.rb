@@ -1,7 +1,18 @@
 require 'csv'
 class Pum < ApplicationRecord
   before_validation :compute_id
-  #validates_uniqueness_of :computed_id
+  validates_uniqueness_of :computed_id
+
+  def partner_records
+    Ce.where(computed_id: computed_id)
+  end
+
+  def self.matches
+   Pum.where("id < 340000").each do |p|
+     ces = Ce.where(computed_id: p.computed_id)
+     p p.id and break if ces.any?
+    end
+  end
 
   def self.process_google_drive
     download_export_files_from_google_drive
@@ -11,10 +22,8 @@ class Pum < ApplicationRecord
   def self.save_local_files
     [ 'google', 'bing' ].each do |source|
       file_name = "db/files/#{source}-pursuit.csv"
-      p "#{file_name}"
       CSV.foreach(file_name, headers: true ).each_with_index do |row, i|
         Pum.save_csv_row(row: row)
-        break if i== 50
       end
     end
   end
@@ -71,7 +80,16 @@ class Pum < ApplicationRecord
      pum.conversions                = row[16].to_i
 
      pum.device_type                = "Desktop" if pum.device_type == "Tablets with Full Browsers" or  pum.device_type == "Computers"
+     begin
        pum.save!
+     rescue ActiveRecord::RecordInvalid
+      p "updating dulicated record: #{pum.computed_id}"
+      existing_pum = Pum.find_by(computed_id: pum.computed_id)
+      existing_pum.cost += pum.cost
+      existing_pum.click_count += pum.click_count
+      existing_pum.conversions += pum.conversions
+      existing_pum.save
+     end
   end
 
   def self.send_report_to_google_drive(pums)
