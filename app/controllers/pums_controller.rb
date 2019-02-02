@@ -3,34 +3,37 @@ class PumsController < ApplicationController
   #before_action :set_date_ranges
 
   def index
-    #TODO ad date filters
-    @start_date = (params[:start_date].present?) ? Chronic.parse(params[:start_date]) : Chronic.parse(Date.today - 1.week)
-    @end_date = (params[:end_date].present?) ? Chronic.parse(params[:end_date]) : Chronic.parse(Date.today)
+    # TODO ad date filters
+    # scope = Pum.where(["date >= ? and date <= ?", @start_date, @end_date] )
+
+    pum_ids = Pum.find_by_sql("select pums.id from pums, ces where ces.computed_id = pums.computed_id" ).collect(&:id)
+    @start_date = (params[:start_date].present? ) ? Chronic.parse(params[:start_date] ) : Chronic.parse( Date.today - 1.week)
+    @end_date = (params[:end_date].present? ) ? Chronic.parse(params[:end_date] ) : Chronic.parse( Date.today)
     @report = params[:report] || 'one'
-    #scope = Pum.where(["date >= ? and date <= ?", @start_date, @end_date] )
-    scope = Pum
-    scope = scope.where(label: params[:label]              ) if params[:label].present?
-    scope = scope.where(account_id: params[:account_id]    ) if params[:account_id].present?
-    scope = scope.where(campaign_id: params[:campaign_id]  ) if params[:campaign_id].present?
-    scope = scope.where(ad_group_id: params[:ad_group_id]  ) if params[:ad_group_id].present?
-    scope = scope.where(keyword_id: params[:keyword_id] ) if params[:keyword_id].present?
-    scope = scope.where(publisher:  params[:publisher]  ) if params[:publisher].present?
-    scope = scope.where(account_name:  params[:account_name]   ) if params[:account_name].present?
-    scope = scope.where(campaign_name:  params[:campaign_name] ) if params[:campaign_name].present?
-    scope = scope.where(ad_group_name:  params[:ad_group_name] ) if params[:ad_group_name].present?
-    scope = scope.where(keyword: params[:key_word]              ) if params[:key_word].present?
-    scope = scope.where(focus_word: params[:focus_word]        ) if params[:focus_word].present?
-    scope = scope.where(industry:  params[:industry]           ) if params[:industry].present?
-    scope = scope.where(device_type:  params[:device_type]     ) if params[:device_type].present?
+
+    scope = Pum.where(id: pum_ids)
+    scope = scope.where(label:         params[:label]         ) if params[:label].present?
+    scope = scope.where(account_id:    params[:account_id]    ) if params[:account_id].present?
+    scope = scope.where(campaign_id:   params[:campaign_id]   ) if params[:campaign_id].present?
+    scope = scope.where(ad_group_id:   params[:ad_group_id]   ) if params[:ad_group_id].present?
+    scope = scope.where(keyword_id:    params[:keyword_id]    ) if params[:keyword_id].present?
+    scope = scope.where(publisher:     params[:publisher]     ) if params[:publisher].present?
+    scope = scope.where(account_name:  params[:account_name]  ) if params[:account_name].present?
+    scope = scope.where(campaign_name: params[:campaign_name] ) if params[:campaign_name].present?
+    scope = scope.where(ad_group_name: params[:ad_group_name] ) if params[:ad_group_name].present?
+    scope = scope.where(keyword:       params[:key_word]      ) if params[:key_word].present?
+    scope = scope.where(focus_word:    params[:focus_word]    ) if params[:focus_word].present?
+    scope = scope.where(industry:      params[:industry]      ) if params[:industry].present?
+    scope = scope.where(device_type:   params[:device_type]   ) if params[:device_type].present?
 
     @sort_order = params[:sort_order] || 'asc'
-    @next_sort_order = (@sort_order == 'desc') ? 'asc' : 'desc'
-    @sort_property =  params[:sort_property] || 'computed_id'
+    @next_sort_order = ( @sort_order == 'desc' ) ? 'asc' : 'desc'
+    @sort_property = params[:sort_property] || 'date'
 
     if params[:format] == "csv"
       @pums = scope.order( { @sort_property => @sort_order } )
     else
-      @pums = scope.page(params[:page]).order( { @sort_property => @sort_order } ).per(20)
+      @pums = scope.page(params[:page]).order( { @sort_property => @sort_order } ).per(1220)
     end
     if params[:export].present?
       Pum.send_report_to_google_drive(@pums)

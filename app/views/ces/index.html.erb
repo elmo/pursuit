@@ -25,8 +25,12 @@
 
 <% end %>
 
-<table>
+<div class="row">
+<div class="col m12 s12">
+
+<table class="striped">
   <thead>
+     <th>Matches</th>
       <% Ce.cols.each do |col| %>
        <th><%= col -%> </th>
       <% end %>
@@ -35,6 +39,9 @@
   <tbody>
     <% @ces.each do |ce| %>
       <tr>
+        <td>
+         <%= Pum.where(computed_id: ce.computed_id).count  %>
+         </td>
          <% Ce.cols.each do |col| %>
            <td>
              <% if col == :grouping_date %>
@@ -50,3 +57,6 @@
 </table>
 
 <%= paginate(@ces) -%>
+
+</div>
+</div>

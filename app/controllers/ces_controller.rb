@@ -10,10 +10,10 @@ class CesController < ApplicationController
     scope = scope.where(adgroup_id: params[:adgroup_id]) if params[:adgroup_id].present?
     respond_to  do |format|
       format.html do
-        @ces = scope.order(computed_id: :asc).page(params[:page]).per(10)
+        @ces = scope.order(grouping_date: :asc).page(params[:page]).per(100)
       end
       format.csv do
-        @ces = scope.page(params[:page]).per(10)
+        @ces = scope
         send_data @ces.to_csv, filename: "campus-explorer-#{Date.today.strftime("%m-%d-%Y")}.csv"
       end
     end

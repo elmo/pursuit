@@ -89,12 +89,14 @@ Exported  Weekly
 </div>
 
 <div class="row">
+<% if false %>
   <div class="col m4">
      <%= link_to "Report One", request.params.merge(report: "one") , class: "btn margined #{@report == 'one' ? 'blue' : '' }" -%>
      <%= link_to "Report Two", request.params.merge(report: "two") , class: "btn margined #{@report == 'two' ? 'blue' : '' }" -%>
      <%= link_to "Report Three", request.params.merge(report: "three") , class: "btn margined #{@report == 'three' ? 'blue' : '' }" -%>
      <%= link_to "Report Four", request.params.merge(report: "four")  , class: "btn margined #{@report == 'four' ? 'blue' : '' }" -%>
   </div>
+<% end %>
 
 
 <div class="col m5">

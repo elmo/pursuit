@@ -100,7 +100,7 @@ class Ce < ApplicationRecord
     return if a.size < 3
     self.campaign_id = a[2].gsub('cp-', '')
     self.adgroup_id = a[3].gsub('ag-', '')
-    self.keyword_id = a[5].gsub('kw-', '') if a[5].present?
+    self.keyword_id = a[5].gsub(/\D/, '') if a[5].present?
     self.page_variation_1 = a[6].gsub('p1var-', '') if a[6].present?
     self.page_variation_2 = a[7].gsub('p2var-', '') if a[7].present?
     self.publisher = ( a[1] == 'pb-b1') ? 'bing' : 'google'

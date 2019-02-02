@@ -1,4 +1,12 @@
-<p id="notice"><%= notice %></p>
+<table class="striped">
+
+<tr>
+<td>
+
+<p>
+  <% @ce = Ce.find_by(computed_id: @pum.computed_id) %>
+  <%= link_to 'Revenue record', ce_path(@ce) -%>
+</p>
 
 <p>
   <strong>Date:</strong>
@@ -120,5 +128,8 @@
   <%= @pum.lead_request_users %>
 </p>
 
-<%= link_to 'Edit', edit_pum_path(@pum) %> |
-<%= link_to 'Back', pums_path %>
+</td>
+</tr>
+
+</table>
+

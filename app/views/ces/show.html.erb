@@ -1,4 +1,32 @@
-<p id="notice"><%= notice %></p>
+<h1>Partner Revenue Detail (Campus Explorer)</h1>
 
-<%= link_to 'Edit', edit_ce_path(@ce) %> |
-<%= link_to 'Back', ces_path %>
+<table class="striped">
+  <tr>
+    <td>
+      <% Ce.cols.each do |col| %>
+        <p> <%= col.to_s -%> :
+        <% if col == :grouping_date %>
+          <%= @ce.send(col).strftime("%m-%d-%Y") -%>
+        <% else %>
+          <%= @ce.send(col) -%>
+        <% end %>
+      <% end %>
+       </p>
+     </td>
+    <td style="vertical-align: baseline;">
+      <% @pum = Pum.find_by(computed_id: @ce.computed_id)  %>
+      <% if @pum.present? %>
+        <%= link_to 'Spending Record', pum_path(@pum) -%>
+        <% Pum.atts.each do |col| %>
+         <p> <%= col.to_s -%> :
+          <% if col == :grouping_date %>
+            <%= @pum.send(col).strftime("%m-%d-%Y") -%>
+          <% else %>
+            <%= @pum.send(col) -%>
+          <% end %>
+        <% end %>
+       </p>
+     <% end %>
+   </td>
+ </tr>
+</table>

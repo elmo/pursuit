@@ -1,23 +1,19 @@
 <nav class="nav-extended">
   <div class="nav-wrapper">
-   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <%= link_to image_tag('logo.png', :size => '215x28'), root_path %>
 
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <% if !user_signed_in?%>
         <li><%= link_to 'Login', new_user_session_path -%></li>
-      <% else %>
         <li><%= link_to 'Campus Explorer Raw', ces_path -%></li>
-        <li><%= link_to 'Pursuit Raw', pursuit_metrics_path -%></li>
-        <li><%= link_to 'Log out', destroy_user_session_path, method: :delete, id: "sign-out-link"  -%></li>
-      <% end %>
+        <li><%= link_to 'Pursuit Raw', pums_path -%></li>
     </ul>
   </div>
 
   <% if user_signed_in? %>
     <div class="nav-content">
-      <ul class="tabs tabs-transparent">
+      <ul class="tabs transparent">
+        <li><%= link_to 'Login', new_user_session_path -%></li>
       </ul>
     </div>
   <% end %>
